@@ -1,0 +1,72 @@
+pipeline {
+    agent any
+
+    environment {
+        IMAGE_NAME = "todoproject_web"
+        DOCKER_COMPOSE_FILE = "docker-compose.yml"
+        HOST_PORT = "8081"
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout your repository
+                checkout scm
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    // Build the Docker image for the web service
+                    sh "docker-compose build"
+                }
+            }
+        }
+
+        stage('Run Migrations') {
+            steps {
+                script {
+                    // Run Django migrations inside the container
+                    sh "docker-compose run web python manage.py migrate"
+                }
+            }
+        }
+
+        stage('Collect Static Files') {
+            steps {
+                script {
+                    // Collect static files (optional)
+                    sh "docker-compose run web python manage.py collectstatic --noinput"
+                }
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                script {
+                    // Run Django tests inside container
+                    sh "docker-compose run web python manage.py test"
+                }
+            }
+        }
+
+        stage('Start Containers') {
+            steps {
+                script {
+                    // Start containers in detached mode
+                    sh "docker-compose up -d"
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "✅ Deployment successful! Access your app on http://localhost:${HOST_PORT}"
+        }
+        failure {
+            echo "❌ Deployment failed!"
+        }
+    }
+}
