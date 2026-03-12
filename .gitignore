@@ -16,6 +16,8 @@ myenv/
 venv/
 env/
 ENV/
+.venv/
+*.venv
 
 # === Environment Variables ===
 .env
@@ -28,6 +30,10 @@ db.sqlite3
 /staticfiles/
 /media/
 *.log
+local_settings.py
+*.sqlite
+*.sqlite3-shm
+*.sqlite3-wal
 
 # === IDE & Editor ===
 .vscode/
@@ -51,6 +57,14 @@ docker-compose.local.yml
 # === OS ===
 .DS_Store
 Thumbs.db
+
+# === Python Version Management ===
+.python-version
+.pyenv
+
+# === Pip ===
+pip-log.txt
+pip-delete-this-directory.txt
 
 # === Testing ===
 .coverage
