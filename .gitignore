@@ -1,34 +1,60 @@
-# Python
+# === Python ===
 __pycache__/
 *.py[cod]
 *.pyo
 *.pyd
-*.sqlite3
-*.log
+*.egg-info/
+.eggs/
+dist/
+build/
+*.egg
+.pytest_cache/
+htmlcov/
 
-# Virtual environment
+# === Virtual Environment ===
 myenv/
 venv/
-.env
+env/
+ENV/
 
-# Django
+# === Environment Variables ===
+.env
+.env.local
+.env.*.local
+
+# === Django ===
 *.pyc
-*.pyo
-*.pyd
 db.sqlite3
 /staticfiles/
-media/
-
-# VSCode
-.vscode/
-
-# Docker
-*.env
+/media/
 *.log
-docker-compose.override.yml
 
-# JetBrains
+# === IDE & Editor ===
+.vscode/
 .idea/
-
-# macOS
+*.swp
+*.swo
+*.swn
+*~
 .DS_Store
+
+# === Docker ===
+docker-compose.override.yml
+docker-compose.local.yml
+
+# === IDE Specific ===
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# === OS ===
+.DS_Store
+Thumbs.db
+
+# === Testing ===
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+.pytest_cache/
